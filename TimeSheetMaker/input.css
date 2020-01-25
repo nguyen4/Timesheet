@@ -1,0 +1,194 @@
+/* Colors
+green:  #7cba3f;
+purple: #8600b7;
+light-purple:
+
+
+*/
+html {
+    background-color: #f6f1fd;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    color: #8600b7;
+    font-weight: 300;
+}
+
+h2 {
+    font-weight: 400;
+}
+
+body {
+    margin: 0px;
+}
+
+/*REUSABLE*/
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.clearfix {
+    clear: both;
+}
+
+.log-form {
+    box-sizing: border-box;
+    width: 70%;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.input {
+    height: 35px;
+    border: none;
+    border-bottom: 2px solid #8600b7;
+}
+
+.name {
+    height: 35px;
+    width: 300px;
+    border: none;
+    text-align: center;
+    font-size: 24px;
+    border-bottom: 2px solid #8600b7;
+}
+
+.time-input {
+    width: 90px;
+}
+
+.btn:link,
+.btn:visited {
+    color: #FFFFFF;
+    background-color: #7cba3f;
+    display: inline-block;
+    padding: 15px 30px;
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: 7px;
+    transition: background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: #619131;
+}
+/*SETUP*/
+.row {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.box {
+    padding: 1%;
+}
+
+h2 {
+    margin: 20px;
+}
+
+/*NAVIGATION*/
+nav {
+    height: 70px;
+    position: relative;
+    background-color: white;
+    border-bottom: 2px solid #7cba3f;
+}
+
+nav img {
+    margin: 0;
+    position: absolute;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+}
+
+/*STEP #*/
+.section-step-6 {
+    background-color: #FFF;
+    text-align: center;
+}
+
+
+/*STEP 1*/
+.section-step-1 {
+    background-color: #FFF;
+}
+
+.start-weeks {
+    text-align: center;
+}
+/*STEP 2*/
+.week-num h3 {
+    color: #7cba3f;
+    transform: scale(1,1.2);
+    text-align: left;
+    font-weight: 500;
+    margin: 10px 0;
+    
+}
+
+.day-row label {
+    text-align: left;
+}
+.day-row {
+    margin: 0 auto;
+    width: 100%;
+    overflow: auto;
+}
+
+.section-step-2 {
+    background-color: #FFF;
+}
+
+.section-step-2 input {
+    display: inline-block;
+    margin-left: 0;
+}
+
+.day {
+    float: left;
+    padding: 6px 0;
+}
+
+/*STEP 3 SIGN*/
+.section-step-3 {
+    background-color: #FFF;
+}
+.container-sign, .container-clear {
+    width:100%;
+    text-align:center;
+}
+
+.canvas-sign {
+    display:inline;
+    border: 1px solid #8600b7;
+}
+
+.canvas-clear {
+    display:inline;
+}
+/*STEP 4 GENERATE*/
+.section-step-4 {
+    background-color: #fff;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.section-step-4 p {
+    margin: 0 auto;
+}

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>TimeSheet Maker</title>
+        <link rel="stylesheet" href="input.css">
+        <link rel="stylesheet" href="vendor/css/grid.css">
+        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+  
+            var ids = [ 'mon-date-1', 'mon-start-1', 'mon-end-1',
+                        'tue-date-1', 'tue-start-1', 'tue-end-1',
+                        'wed-date-1', 'wed-start-1', 'wed-end-1',
+                        'thu-date-1', 'thu-start-1', 'thu-end-1',
+                        'fri-date-1', 'fri-start-1', 'fri-end-1',
+                        'sat-date-1', 'sat-start-1', 'sat-end-1',
+                        'sun-date-1', 'sun-start-1', 'sun-end-1',
+                        'mon-date-2', 'mon-start-2', 'mon-end-2',
+                        'tue-date-2', 'tue-start-2', 'tue-end-2',
+                        'wed-date-2', 'wed-start-2', 'wed-end-2',
+                        'thu-date-2', 'thu-start-2', 'thu-end-2',
+                        'fri-date-2', 'fri-start-2', 'fri-end-2',
+                        'sat-date-2', 'sat-start-2', 'sat-end-2',
+                        'sun-date-2', 'sun-start-2', 'sun-end-2'
+                      ];
+            
+            function packageData() {
+                
+                localStorage.clear();
+                saveName();
+                saveElements();
+                saveCanvas();
+                
+            }
+            
+            function serialize(canvas) {
+                return canvas.toDataURL();
+            }
+            
+            function saveCanvas() {
+                //localStorage["canvas"] = serialize(document.getElementById('canvas'));
+                var signature = serialize(document.getElementById('canvas'));
+                localStorage['canvas'] = signature;
+            }
+            
+            function saveElements() {
+                
+                for (var i = 0; i < ids.length; i++){
+                
+                    localStorage.setItem(ids[i], document.getElementById(ids[i]).value);
+            
+                } 
+            }
+            
+            function saveName() {
+                
+                localStorage['name'] = $('#name').val();
+                consol.log(localStorage['name']);
+            }
+            
+           
+                
+    </script>
+    
+    </head>
+    
+    <body>
+        <nav>
+            <img src='resources/images/Logo.jpeg' alt="logo">
+        </nav>
+        <section>
+            <div class="row section-step-6">
+                
+                <h1>Step #</h1>
+                <h2>Tell us your name</h2>
+                
+                <div>
+                    <input id="name" type="text" class="name" placeholder="Your name">   
+                </div>
+                
+            </div>
+            <div class="row section-step-1">
+                
+                <h1>Step 1</h1>
+                <h2>Choose the payroll starting week</h2>
+                
+                <div class="start-weeks">  
+                    <input id="start-date" type="text"> 
+                    <script>
+                        $( "#start-date" ).datepicker();
+                    </script>
+                </div>
+                
+            </div>
+        </section>
+        
+        <section>
+            
+            <div class="row section-step-2">
+                
+                <h1>Step 2</h1>
+                <h2>Log your hours</h2>
+                
+                <form id="week-1" method="post" class="log-form">
+                    
+                    <div class="week-num">
+                        <h3>Week 1</h3>
+                    </div>
+                    
+                    <div id="titles" class="day-row">
+
+                        <div class="col span-1-of-4">
+                             <label>Day</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                             <label>Date</label>
+                        </div> 
+                        <div class="col span-1-of-4">
+                             <label>Start Time</label> 
+                        </div>
+                        <div class="col span-1-of-4">
+                             <label>End Time</label>
+                        </div>
+
+                    </div>
+
+                    <div id="mon-1" class="day-row">
+                        
+                        <div class="col span-1-of-4 day">
+                             <label>MONDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="mon-date-1" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="mon-start-1" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="mon-end-1" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="tue-1" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>TUESDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="tue-date-1" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="tue-start-1" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="tue-end-1" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="wed-1" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>WEDNESDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="wed-date-1" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="wed-start-1" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="wed-end-1" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="thur-1" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>THURDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="thu-date-1" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="thu-start-1" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="thu-end-1" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="fri-1" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>FRIDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="fri-date-1" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="fri-start-1" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="fri-end-1" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="sat-1" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>SATURDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="sat-date-1" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="sat-start-1" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="sat-end-1" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="sun-1" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>SUNDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="sun-date-1" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="sun-start-1" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="sun-end-1" class="input time-input">
+                        </div>
+
+                    </div>
+
+                </form>
+                
+                <form id="week-2" method="post" class="log-form">
+                        
+                    <div class="week-num">
+                        <h3>Week 2</h3>
+                    </div>
+
+                    <div id="titles" class="day-row">
+
+                        <div class="col span-1-of-4">
+                             <label>Day</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                             <label>Date</label>
+                        </div> 
+                        <div class="col span-1-of-4">
+                             <label>Start Time</label> 
+                        </div>
+                        <div class="col span-1-of-4">
+                             <label>End Time</label>
+                        </div>
+
+                    </div>
+
+                    <div id="mon-2" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>MONDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="mon-date-2" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="mon-start-2" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="mon-end-2" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="tue-2" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>TUESDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="tue-date-2" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="tue-start-2" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="tue-end-2" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="wed-2" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>WEDNESDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="wed-date-2" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="wed-start-2" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="wed-end-2" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="thur-2" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>THURDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="thu-date-2" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="thu-start-2" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="thu-end-2" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="fri-2" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>FRIDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="fri-date-2" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="fri-start-2" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="fri-end-2" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="sat-2" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>SATURDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="sat-date-2" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="sat-start-2" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="sat-end-2" class="input time-input">
+                        </div>
+
+                    </div>
+
+                    <div id="sun-2" class="day-row">
+
+                        <div class="col span-1-of-4 day">
+                             <label>SUNDAY</label>
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="date" id="sun-date-2" class="input"> 
+                        </div> 
+                        <div class="col span-1-of-4">
+                            <input type="time" id="sun-start-2" class="input time-input">
+                        </div>
+                        <div class="col span-1-of-4">
+                            <input type="time" id="sun-end-2" class="input time-input">
+                        </div>
+
+                    </div>
+
+                </form>
+                
+            </div>
+        </section>
+        
+        <section>
+            
+            <div class="row section-step-3">
+                
+                <h1>Step 3</h1>
+                <h2>Sign Here</h2>
+                
+                <div class="container-sign">
+                    <canvas id="canvas" style="width:600px; height:300px;" width="600" height="300" class="canvas-sign"></canvas>       
+                    <script src="resources/js/signature-module.js"></script>
+                </div>
+                <div class="container-clear">
+                    <input type="button" value="Clear" class="canvas-clear" />
+                    <script>
+                        $('.canvas-clear').on('click', function(e) {
+                            var $canvas = $('#canvas');
+                            var ctx = $canvas[0].getContext('2d');
+                            c_width = $canvas.width();
+                            c_height = $canvas.height();
+                            ctx.clearRect(0, 0, c_width, c_height);
+                            });
+                    </script>
+                </div>
+            </div>
+        
+        </section>
+        
+        <section>
+            
+            <div class="row section-step-4">
+                <h1>Step 4</h1>
+                <h2>Click generate to make your timesheet</h2>
+                <p>
+                    <a class="btn btn-full generate" id="btn-generate" onClick="packageData()" href="generated.html">GENERATE</a>
+                </p>
+            </div>
+            
+        </section>
+            
+    </body>
+</html>
