@@ -61,11 +61,26 @@
                 localStorage['name'] = $('#name').val();
                 consol.log(localStorage['name']);
             }
-            
-           
-                
+   
     </script>
     
+    <script>
+            
+        function getToday() {
+            return new Date();    
+        }
+        
+        function getMonday(date){
+            
+            var Date = date;
+            var day = Date.getDay() || 7;
+            if ( day != 1 ){
+                Date.setHours(-24 * (day - 1));
+            }
+            return Date;
+        }
+            
+    </script>    
     </head>
     
     <body>
@@ -73,9 +88,9 @@
             <img src='resources/images/Logo.jpeg' alt="logo">
         </nav>
         <section>
-            <div class="row section-step-6">
+            <div class="row section-step-1">
                 
-                <h1>Step #</h1>
+                <h1>Step 1</h1>
                 <h2>Tell us your name</h2>
                 
                 <div>
@@ -85,7 +100,7 @@
             </div>
             <div class="row section-step-1">
                 
-                <h1>Step 1</h1>
+                <!--<h1>Step 1</h1>
                 <h2>Choose the payroll starting week</h2>
                 
                 <div class="start-weeks">  
@@ -93,11 +108,10 @@
                     <script>
                         $( "#start-date" ).datepicker();
                     </script>
-                </div>
+                </div>-->
                 
             </div>
         </section>
-        
         <section>
             
             <div class="row section-step-2">
@@ -105,6 +119,26 @@
                 <h1>Step 2</h1>
                 <h2>Log your hours</h2>
                 
+                <!--<div class="date-container">
+                    <div class="row">
+                        <div class="col span-1-of-5 red" id="left-button">
+                            left
+                        </div>
+                        <div class="col span-3-of-5 blue">
+                            
+                            <h4 id="current-week">1/28/2020</h4>
+                            <script>
+                                var date = getToday();
+                                var mon = getMonday(date);
+                                
+                                $('#current-week').text(mon.format("mm/dd/y"));
+                            </script>
+                        </div>
+                        <div class="col span-1-of-5 red" d="left-button">
+                            right
+                        </div>
+                    </div>
+                </div>-->
                 <form id="week-1" method="post" class="log-form">
                     
                     <div class="week-num">

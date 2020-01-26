@@ -1,7 +1,7 @@
 /* Colors
 green:  #7cba3f;
 purple: #8600b7;
-light-purple:
+light-purple: #f6f1fd;
 
 
 */
@@ -116,18 +116,31 @@ nav img {
     transform: translate(-50%, -50%);
 
 }
+/*TEST*/
+.red {
+    background-color: crimson;
+}
 
-/*STEP #*/
-.section-step-6 {
+.blue {
+    background-color: aqua;
+}
+
+/*DATE*/
+.date-container {
+    background-color: #f6f1fd;
+    text-align: center;
+}
+/*STEP 1*/
+.section-step-1 {
     background-color: #FFF;
     text-align: center;
 }
 
 
 /*STEP 1*/
-.section-step-1 {
+/*.section-step-1 {
     background-color: #FFF;
-}
+}*/
 
 .start-weeks {
     text-align: center;
