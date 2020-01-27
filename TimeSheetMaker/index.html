@@ -59,27 +59,100 @@
             function saveName() {
                 
                 localStorage['name'] = $('#name').val();
-                consol.log(localStorage['name']);
+                console.log(localStorage['name']);
             }
    
     </script>
     
     <script>
-            
-        function getToday() {
-            return new Date();    
+
+        var startMon, endSun, currentMon, currentSun;
+        
+        $(document).ready(function() {
+            initWeekRange();
+            fillWeekHeader(startMon, endSun);
+            currentMon = copyDate(startMon);
+            currentSun = copyDate(endSun);
+        });
+         
+        function initWeekRange(){
+            endSun = getSunday();
+            startMon = getSunday();
+            startMon.setHours(-24 * 13);
         }
         
-        function getMonday(date){
+        function fillWeekHeader(Mon, Sun) {
             
-            var Date = date;
-            var day = Date.getDay() || 7;
-            if ( day != 1 ){
-                Date.setHours(-24 * (day - 1));
+            var mondayDate = stringifyDate(Mon),
+                sundayDate = stringifyDate(Sun);
+            
+             $('#week').text(mondayDate + ' - ' + sundayDate);
+        }
+        
+        function stringifyDate(date){
+            
+            var month    = date.getMonth() + 1,
+                day      = date.getDate(),
+                year     = date.getFullYear();
+            
+            return month + '/' + day + '/' + year;
+        }
+        
+        function getSunday(){
+            
+            var date = new Date();
+            var day = date.getDay();
+            if ( day != 0 ){
+                date.setHours(24 * (7 - day));
             }
-            return Date;
+            return date;
+        }
+        
+        function copyDate(date){
+            
+            var copy = new Date();
+            copy.setMonth(date.getMonth());
+            copy.setDate(date.getDate());
+            copy.setFullYear(date.getFullYear());
+            
+            return copy;
+    
         }
             
+        /*Button scripts*/
+        
+        function switchWeeks(left, monday, sunday){
+            
+            var newMonday, newSunday, mondayCopy = copyDate(monday), sundayCopy = copyDate(sunday);
+            
+            if (left) {
+                newMonday = goBackTwoWeeks(mondayCopy);
+                newSunday = goBackTwoWeeks(sundayCopy);  
+            }
+            else {
+                newMonday = goForwardTwoWeeks(mondayCopy);
+                newSunday = goForwardTwoWeeks(sundayCopy);
+            }
+            
+            $('#week').text(stringifyDate(newMonday) + ' - ' + stringifyDate(newSunday));
+            currentMon = newMonday;
+            currentSun = newSunday;
+        }
+        
+        function goBackTwoWeeks(date){
+    
+            date.setHours(-24 * 14);
+            return date;
+            
+        }
+        
+        function goForwardTwoWeeks(date){
+            
+            date.setHours(+24 * 14);
+            return date;
+            
+        }
+        
     </script>    
     </head>
     
@@ -119,26 +192,31 @@
                 <h1>Step 2</h1>
                 <h2>Log your hours</h2>
                 
-                <!--<div class="date-container">
+                <div class="date-container">
                     <div class="row">
                         <div class="col span-1-of-5 red" id="left-button">
-                            left
+                            <button type="button" id="go-back">Left</button>
+                            <script>
+                            $('#go-back').click(function(){
+                               switchWeeks(true, currentMon, currentSun); 
+                            });
+                            </script>
                         </div>
                         <div class="col span-3-of-5 blue">
                             
-                            <h4 id="current-week">1/28/2020</h4>
-                            <script>
-                                var date = getToday();
-                                var mon = getMonday(date);
-                                
-                                $('#current-week').text(mon.format("mm/dd/y"));
-                            </script>
+                            <h4 id="week"></h4>
+                            
                         </div>
                         <div class="col span-1-of-5 red" d="left-button">
-                            right
+                            <button type="button" id="go-forward">Right</button>
+                            <script>
+                            $('#go-forward').click(function(){
+                               switchWeeks(false, currentMon, currentSun); 
+                            });
+                            </script>
                         </div>
                     </div>
-                </div>-->
+                </div>
                 <form id="week-1" method="post" class="log-form">
                     
                     <div class="week-num">
