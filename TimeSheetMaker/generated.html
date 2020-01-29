@@ -41,18 +41,20 @@
                         elapsedTime = '',
                         timeIn, timeOut;
                     
-                    if ( date != null){   //change date
+                    console.log(date);
+                    console.log('start: ' + start + ' |End: ' + end);
+                    if ( date != false){   //change date
                         changeData( i, 0, date, weekId );
                     }
-                    if ( start != null) { //change start time  
+                    if ( start != false) { //change start time  
                         timeIn = convertTo12Hour(start);
                         changeData( i, 1, timeIn, weekId );
                     } 
-                    if ( end != null) {   //change end time
+                    if ( end != false) {   //change end time
                         timeOut = convertTo12Hour(end);
                         changeData( i, 2, timeOut, weekId );
                     }
-                    if ( start != null && end != null ){ //change total hours
+                    if ( start != false && end != false ){ //change total hours
                         elapsedTime = getElapsedTime( start, end );
                         changeData( i, 3, elapsedTime, weekId );
                     }
@@ -256,9 +258,9 @@
         <div class="container">
             
             <img src="resources/images/TimeSheet.jpg" alt="image of timesheet">
-            <h2><span id="name" class="name"></span></h2>
-            <span id="from_date" class="date">12/30/2019</span>
-            <span id="to_date" class="date2">01/12/2020</span>
+            <h2><span id="name" class="name">Tom Nguyen</span></h2>
+            <span id="from_date" class="date">01/13/2020</span>
+            <span id="to_date" class="date2">01/26/2020</span>
             
             <div class="table-1">
                 
