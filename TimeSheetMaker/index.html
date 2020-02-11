@@ -6,10 +6,11 @@
         <title>TimeSheet Maker</title>
         <link rel="stylesheet" href="input.css">
         <link rel="stylesheet" href="vendor/css/grid.css">
-        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="vendor/css/toggle-switch.css">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.3.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.3.2/js/bootstrap-toggle.min.js"></script>
         <script>
   
             var ids = [ 'mon-date-1', 'mon-start-1', 'mon-end-1',
@@ -28,10 +29,26 @@
                         'sun-date-2', 'sun-start-2', 'sun-end-2'
                       ];
             
+            var date_ids = [ '#mon-date-1',
+                             '#tue-date-1',
+                             '#wed-date-1',
+                             '#thu-date-1',
+                             '#fri-date-1',
+                             '#sat-date-1',
+                             '#sun-date-1',
+                             '#mon-date-2',
+                             '#tue-date-2',
+                             '#wed-date-2',
+                             '#thu-date-2',
+                             '#fri-date-2',
+                             '#sat-date-2',
+                             '#sun-date-2'
+                           ]
+            
             function packageData() {
                 
                 localStorage.clear();
-                saveName();
+                //saveName();
                 saveElements();
                 saveCanvas();
                 
@@ -70,11 +87,17 @@
         
         $(document).ready(function() {
             initWeekRange();
-            fillWeekHeader(startMon, endSun);
-            currentMon = copyDate(startMon);
-            currentSun = copyDate(endSun);
+            fillWeekHeader( startMon, endSun );
+            currentMon = new Date( startMon.getTime() );
+            currentSun = new Date( endSun.getTime() );
+            autofillDate( currentMon, currentSun );
         });
          
+        function refreshCard(left){
+            switchWeeks( left, currentMon, currentSun );
+            autofillDate( currentMon, currentSun );
+        }
+        
         function initWeekRange(){
             endSun = getSunday();
             startMon = getSunday();
@@ -107,31 +130,20 @@
             }
             return date;
         }
-        
-        function copyDate(date){
-            
-            var copy = new Date();
-            copy.setMonth(date.getMonth());
-            copy.setDate(date.getDate());
-            copy.setFullYear(date.getFullYear());
-            
-            return copy;
-    
-        }
             
         /*Button scripts*/
         
         function switchWeeks(left, monday, sunday){
             
-            var newMonday, newSunday, mondayCopy = copyDate(monday), sundayCopy = copyDate(sunday);
+            var newMonday, newSunday;
             
             if (left) {
-                newMonday = goBackTwoWeeks(mondayCopy);
-                newSunday = goBackTwoWeeks(sundayCopy);  
+                newMonday = goBackTwoWeeks(monday);
+                newSunday = goBackTwoWeeks(sunday);  
             }
             else {
-                newMonday = goForwardTwoWeeks(mondayCopy);
-                newSunday = goForwardTwoWeeks(sundayCopy);
+                newMonday = goForwardTwoWeeks(monday);
+                newSunday = goForwardTwoWeeks(sunday);
             }
             
             $('#week').text(stringifyDate(newMonday) + ' - ' + stringifyDate(newSunday));
@@ -140,27 +152,77 @@
         }
         
         function goBackTwoWeeks(date){
-    
-            date.setHours(-24 * 14);
-            return date;
+            
+            var newDate = new Date(date.getTime());
+            newDate.setHours(-24 * 14);
+            return newDate;
             
         }
         
         function goForwardTwoWeeks(date){
             
-            date.setHours(+24 * 14);
-            return date;
+            var newDate = new Date(date.getTime());
+            newDate.setHours(+24 * 14);
+            return newDate;
             
         }
+        
+        function autofillDate(startDate, endDate){
+                
+            var dates = getListOfDates(startDate, endDate);
+                
+            try {
+                
+                if (dates.length != date_ids.length) { throw dates.length; }
+
+                for (var i = 0; i < date_ids.length; i++) {
+                    
+                    var dd = dates[i].getDate(),
+                        mm = dates[i].getMonth() + 1,
+                        yyyy = dates[i].getFullYear();
+                    
+                    var stringDate = (mm + '/' + dd + '/' + yyyy);
+                    $(date_ids[i]).text(stringDate);
+                }
+                
+            } catch (e) {
+                console.log('Incorrect number of dates. There are ' + e + ' dates');
+            }
+        }
+        
+        function getListOfDates(startDate, endDate) {
+            
+            var list = [startDate];
+            var endDay = endDate.getDate();
+            var endMonth = endDate.getMonth();
+            var endYear = endDate.getFullYear();
+            var current = list[0];
+            var nextDate;
+            
+            while ( current.getDate()       != endDay    ||
+                    current.getMonth()      != endMonth  ||
+                    current.getFullYear()   != endYear    
+                  ) 
+            {
+                nextDate = new Date(current.getTime());
+                nextDate.setDate(nextDate.getDate() + 1);
+                list.push(nextDate);
+                current = list[list.length - 1];
+            }
+                     
+            return list;
+        }
+        
         
     </script>    
     </head>
     
     <body>
+        
         <nav>
             <img src='resources/images/Logo.jpeg' alt="logo">
         </nav>
-        <section>
+        <!--<section>
             <div class="row section-step-1">
                 
                 <h1>Step 1</h1>
@@ -173,52 +235,60 @@
             </div>
             
         </section>
-        <section>
-            
-            <div class="row section-step-2">
+        <section>-->
+        
+        <div class="card dim">
+        
+            <div class="row section-step-1">
                 
-                <h1>Step 2</h1>
-                <h2>Log your hours</h2>
+                <!--<h1>Step 2</h1>
+                <h2>Log your hours</h2>-->
                 
                 <div class="date-container">
                     <div class="row">
-                        <div class="col span-1-of-5 red" id="left-button">
-                            <button type="button" id="go-back">Left</button>
+                        <div class="col span-1-of-5 switch-item" id="left-button">
+                            <button class="switch-icon switch-button left" type="button" id="go-back">&lt</button>
                             <script>
                             $('#go-back').click(function(){
-                               switchWeeks(true, currentMon, currentSun); 
+                               refreshCard(true);
                             });
                             </script>
                         </div>
-                        <div class="col span-3-of-5 blue">
+                        <div class="col span-3-of-5 switch-item">
                             
-                            <h4 id="week"></h4>
+                            <span id="week"></span>
                             
                         </div>
-                        <div class="col span-1-of-5 red" d="left-button">
-                            <button type="button" id="go-forward">Right</button>
+                        <div class="col span-1-of-5 switch-item" id="left-button">
+                            <button class="switch-icon switch-button right" type="button" id="go-forward">&gt</button>
                             <script>
                             $('#go-forward').click(function(){
-                               switchWeeks(false, currentMon, currentSun); 
+                               refreshCard(false);
                             });
                             </script>
                         </div>
                     </div>
                 </div>
-                <form id="week-1" method="post" class="log-form">
+                
+                <div class="hour-log">
                     
-                    <div class="week-num">
+<!--                <form id="week-1" method="post" class="log-form" style="text-align: center;">-->
+                    
+                    <!--<div class="week-num">
                         <h3>Week 1</h3>
-                    </div>
+                    </div>-->
                     
-                    <div id="titles" class="day-row">
-
-                        <div class="col span-1-of-4">
+                    <!--<div id="titles" class="day-row">
+                        
+                        <div>
+                            <div class="col span-1-of-4">
                              <label>Day</label>
                         </div>
                         <div class="col span-1-of-4">
                              <label>Date</label>
                         </div> 
+                        </div>
+                        
                         <div class="col span-1-of-4">
                              <label>Start Time</label> 
                         </div>
@@ -226,49 +296,74 @@
                              <label>End Time</label>
                         </div>
 
-                    </div>
-
-                    <div id="mon-1" class="day-row">
+                    </div>-->
+                    <div id="week-1" class="log-form">
+                    
+                    
+                    <div id="mon-1" class="row"  style="border-bottom: 1px solid #e2e2e2;">
                         
-                        <div class="col span-1-of-4 day">
-                             <label>MONDAY</label>
+                        <div class="clear-margins col span-1-of-5">
+                            
+                                <div class="col span-1-of-2">
+                                     <span>MON</span>
+                                </div>
+                                <div class="col span-1-of-2">
+                                    <span id="mon-date-1" class="input"></span> 
+                                </div>
+                            
                         </div>
-                        <div class="col span-1-of-4">
-                            <input type="date" id="mon-date-1" class="input"> 
-                        </div> 
-                        <div class="col span-1-of-4">
-                            <input type="time" id="mon-start-1" class="input time-input">
+                        
+                        <div class="col span-2-of-5">
+                            <div class="col span-1-of-2">
+                                <input type="text" id="mon-start-1" class="input">
+                            </div>
+                            
+                            <div class="col span-1-of-2">
+                                <input type="checkbox" checked data-toggle="toggle">   
+                            </div>
+                            
                         </div>
-                        <div class="col span-1-of-4">
-                            <input type="time" id="mon-end-1" class="input time-input">
+                        <div class="col span-2-of-5">
+                            <div class="col span-1-of-2">
+                                <input type="text" id="mon-end-1" class="input">
+                            </div>
+                            
+                            <div class="col span-1-of-2">
+                                <input type="checkbox" checked data-toggle="toggle">
+                            </div>
+                            
                         </div>
 
                     </div>
 
-                    <div id="tue-1" class="day-row">
-
-                        <div class="col span-1-of-4 day">
-                             <label>TUESDAY</label>
+</div>
+                    <!--<div id="tue-1" class="row">
+                        
+                        <div class="col span-1-of-5">
+                            <div class="col span-1-of-2">
+                             <span>TUE</span>
+                            </div>
+                            <div class="col span-1-of-2">
+                                <span id="tue-date-1" class="input"></span>
+                            </div>
                         </div>
-                        <div class="col span-1-of-4">
-                            <input type="date" id="tue-date-1" class="input"> 
-                        </div> 
-                        <div class="col span-1-of-4">
-                            <input type="time" id="tue-start-1" class="input time-input">
+                         
+                        <div class="col span-2-of-5">
+                            <input type="text" id="tue-start-1" class="input time-input">
                         </div>
-                        <div class="col span-1-of-4">
-                            <input type="time" id="tue-end-1" class="input time-input">
+                        <div class="col span-2-of-5">
+                            <input type="text" id="tue-end-1" class="input time-input">
                         </div>
 
                     </div>
 
-                    <div id="wed-1" class="day-row">
+                    <div id="wed-1" class="row">
 
                         <div class="col span-1-of-4 day">
-                             <label>WEDNESDAY</label>
+                             <label>WED</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="wed-date-1" class="input"> 
+                            <span id="wed-date-1" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="wed-start-1" class="input time-input">
@@ -279,13 +374,13 @@
 
                     </div>
 
-                    <div id="thur-1" class="day-row">
+                    <div id="thur-1" class="row">
 
                         <div class="col span-1-of-4 day">
-                             <label>THURDAY</label>
+                             <label>THU</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="thu-date-1" class="input"> 
+                            <span id="thu-date-1" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="thu-start-1" class="input time-input">
@@ -296,13 +391,13 @@
 
                     </div>
 
-                    <div id="fri-1" class="day-row">
+                    <div id="fri-1" class="row">
 
                         <div class="col span-1-of-4 day">
-                             <label>FRIDAY</label>
+                             <label>FRI</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="fri-date-1" class="input"> 
+                            <span id="fri-date-1" class="input"></span> 
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="fri-start-1" class="input time-input">
@@ -313,13 +408,13 @@
 
                     </div>
 
-                    <div id="sat-1" class="day-row">
+                    <div id="sat-1" class="row">
 
                         <div class="col span-1-of-4 day">
-                             <label>SATURDAY</label>
+                             <label>SAT</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="sat-date-1" class="input"> 
+                            <span id="sat-date-1" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="sat-start-1" class="input time-input">
@@ -330,13 +425,13 @@
 
                     </div>
 
-                    <div id="sun-1" class="day-row">
+                    <div id="sun-1" class="row">
 
                         <div class="col span-1-of-4 day">
-                             <label>SUNDAY</label>
+                             <label>SUN</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="sun-date-1" class="input"> 
+                            <span id="sun-date-1" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="sun-start-1" class="input time-input">
@@ -355,7 +450,7 @@
                         <h3>Week 2</h3>
                     </div>
 
-                    <div id="titles" class="day-row">
+                    <div id="titles" class="row">
 
                         <div class="col span-1-of-4">
                              <label>Day</label>
@@ -372,13 +467,13 @@
 
                     </div>
 
-                    <div id="mon-2" class="day-row">
+                    <div id="mon-2" class="row">
 
                         <div class="col span-1-of-4 day">
                              <label>MONDAY</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="mon-date-2" class="input"> 
+                            <span id="mon-date-2" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="mon-start-2" class="input time-input">
@@ -389,13 +484,13 @@
 
                     </div>
 
-                    <div id="tue-2" class="day-row">
+                    <div id="tue-2" class="row">
 
                         <div class="col span-1-of-4 day">
                              <label>TUESDAY</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="tue-date-2" class="input"> 
+                            <span id="tue-date-2" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="tue-start-2" class="input time-input">
@@ -406,13 +501,13 @@
 
                     </div>
 
-                    <div id="wed-2" class="day-row">
+                    <div id="wed-2" class="row">
 
                         <div class="col span-1-of-4 day">
                              <label>WEDNESDAY</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="wed-date-2" class="input"> 
+                            <span type="text" id="wed-date-2" class="input"></span> 
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="wed-start-2" class="input time-input">
@@ -423,13 +518,13 @@
 
                     </div>
 
-                    <div id="thur-2" class="day-row">
+                    <div id="thur-2" class="row">
 
                         <div class="col span-1-of-4 day">
                              <label>THURDAY</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="thu-date-2" class="input"> 
+                            <span id="thu-date-2" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="thu-start-2" class="input time-input">
@@ -440,13 +535,13 @@
 
                     </div>
 
-                    <div id="fri-2" class="day-row">
+                    <div id="fri-2" class="row">
 
                         <div class="col span-1-of-4 day">
                              <label>FRIDAY</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="fri-date-2" class="input"> 
+                            <span id="fri-date-2" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="fri-start-2" class="input time-input">
@@ -457,13 +552,13 @@
 
                     </div>
 
-                    <div id="sat-2" class="day-row">
+                    <div id="sat-2" class="row">
 
                         <div class="col span-1-of-4 day">
                              <label>SATURDAY</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="sat-date-2" class="input"> 
+                            <span type="text" id="sat-date-2" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="sat-start-2" class="input time-input">
@@ -474,13 +569,13 @@
 
                     </div>
 
-                    <div id="sun-2" class="day-row">
+                    <div id="sun-2" class="row">
 
                         <div class="col span-1-of-4 day">
                              <label>SUNDAY</label>
                         </div>
                         <div class="col span-1-of-4">
-                            <input type="date" id="sun-date-2" class="input"> 
+                            <span type="text" id="sun-date-2" class="input"></span>
                         </div> 
                         <div class="col span-1-of-4">
                             <input type="time" id="sun-start-2" class="input time-input">
@@ -492,7 +587,9 @@
                     </div>
 
                 </form>
+-->
                 
+                </div>
             </div>
         </section>
         
@@ -534,6 +631,6 @@
             </div>
             
         </section>
-            
+        </div>    
     </body>
 </html>
