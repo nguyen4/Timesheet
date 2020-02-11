@@ -6,10 +6,10 @@ light-purple: #f6f1fd;
 .switch {
   position: relative;
   display: inline-block;
-  width: 55px;
+  width: 54.5px;
   height: 25px;
   z-index: 2;
-  overflow: hidden;
+  /*overflow: hidden;*/
     
 }
 
@@ -58,7 +58,7 @@ input:checked + .slider {
 }
     
 input:checked + .slider:hover {
-  background-color: #ba00fd;
+  background-color: #68008e;
 }
 
 input:checked + .slider:before {
@@ -84,10 +84,12 @@ input:checked + .slider:before {
 .am,
 .pm {
     position: absolute;
+    display: inline-block;
     color: white;
     font-size: 16px;
     font-family: 'Verdana';
     top: 3px;
+    height: 100%;
     z-index: -100px;
     -webkit-transition: .4s;
     transition: .4s;
@@ -111,10 +113,9 @@ input:checked + .slider:before {
         transform: translateX(37px);
     }
     
-    .container {
+    .text-container {
         position: relative;
         display: inline-block;
-        width: 150px;
     }
 
 .shrink{
