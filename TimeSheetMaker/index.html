@@ -218,7 +218,7 @@
     </head>
     
     <body>
-        
+    <div>
         <nav>
             <img src='resources/images/Logo.jpeg' alt="logo">
         </nav>
@@ -237,8 +237,8 @@
         </section>
         <section>-->
         
-        <div class="card dim">
-        
+        <div class="dim">
+            <div class="container">
             <div class="row section-step-1">
                 
                 <!--<h1>Step 2</h1>
@@ -300,51 +300,54 @@
                     <div id="week-1" class="log-form">
                     
                     
-                    <div id="mon-1" class="row"  style="border-bottom: 1px solid #e2e2e2;">
+                    <div id="mon-1" class="row day-row">
                         
-                        <div class="clear-margins col span-1-of-5">
+                        <div id="day-container" class="col span-1-of-3 clear-margins">
+                                
+                            <span>MON</span>
                             
-                                <div class="col span-1-of-2">
-                                     <span>MON</span>
-                                </div>
-                                <div class="col span-1-of-2">
-                                    <span id="mon-date-1" class="input"></span> 
-                                </div>
+                            <div class="vl"></div>
+                                
+                            <span id="mon-date-1"></span> 
+                                
                             
                         </div>
                         
-                        <div class="col span-2-of-5">
-                            <div class="col span-1-of-2">
-                                <input type="text" id="mon-start-1" class="input">
+                        <div class="col span-2-of-3 clear-margins">
+                            
+                            <input type="text" id="mon-start-1" class="input">
+
+                            <div class="toggle">
+                                <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round">
+                                            <span class="am">AM</span>
+                                            <span class="pm">PM</span>
+                                        </span>
+                                </label>
                             </div>
                             
-                        <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round">
-                                    <span class="am">AM</span>
-                                    <span class="pm">PM</span>
-                                </span>
-                            </label>
-                            
-                        </div>
-                        <div class="col span-2-of-5">
-                            <div class="col span-1-of-2">
-                                <input type="text" id="mon-end-1" class="input">
+                            <div id="to">
+                                <span>TO</span>
                             </div>
                             
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round">
-                                    <span class="am">AM</span>
-                                    <span class="pm">PM</span>
-                                </span>
-                            </label>
+                            <div class="toggle">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round">
+                                        <span class="am">AM</span>
+                                        <span class="pm">PM</span>
+                                    </span>
+                                </label>
+                            </div>
+                            
+                            <input type="text" id="mon-end-1" class="input">
                             
                         </div>
 
                     </div>
 
-</div>
+                    </div>
                     
                     <!--<div id="tue-1" class="row">
                         
@@ -640,6 +643,8 @@
             </div>
             
         </section>
-        </div>    
+        </div>
+        </div> 
+        </div>
     </body>
 </html>

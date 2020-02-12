@@ -9,7 +9,7 @@ light-purple: #f6f1fd;
   width: 54.5px;
   height: 25px;
   z-index: 2;
-  /*overflow: hidden;*/
+  overflow: hidden;
     
 }
 
@@ -78,9 +78,6 @@ input:checked + .slider:before {
 
 /*AM PM tags*/
     
-.pm {
-    ;
-}
 .am,
 .pm {
     position: absolute;
@@ -99,23 +96,20 @@ input:checked + .slider:before {
     left: 23px;
 }
 .pm {
-    left: -28px;    
+    left: -28px;
 }
 
     input:checked + .slider .am{
         -webkit-transform: translateX(37px);
         -ms-transform: translateX(37px);
-        transform: translateX(37px);
+        transform: translateX(37px);      
+        
     }
     input:checked + .slider .pm{
         -webkit-transform: translateX(37px);
         -ms-transform: translateX(37px);
         transform: translateX(37px);
-    }
-    
-    .text-container {
-        position: relative;
-        display: inline-block;
+
     }
 
 .shrink{
