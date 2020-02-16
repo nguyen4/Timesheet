@@ -259,7 +259,7 @@
                             <span id="week"></span>
                             
                         </div>
-                        <div class="col span-1-of-5 switch-item" id="left-button">
+                        <div class="col span-1-of-5 switch-item" id="right-button">
                             <button class="switch-icon switch-button right" type="button" id="go-forward">&gt</button>
                             <script>
                             $('#go-forward').click(function(){
@@ -298,57 +298,238 @@
 
                     </div>-->
                     <div id="week-1" class="log-form">
-                    
-                    
-                    <div id="mon-1" class="row day-row">
                         
-                        <div id="day-container" class="col span-1-of-3 clear-margins">
-                                
-                            <span>MON</span>
-                            
-                            <div class="vl"></div>
-                                
-                            <span id="mon-date-1"></span> 
-                                
-                            
-                        </div>
-                        
-                        <div class="col span-2-of-3 clear-margins">
-                            
-                            <input type="text" id="mon-start-1" class="input">
-
-                            <div class="toggle">
-                                <label class="switch">
+                        <div id="mon-1" class="row day-row">
+                            <div id="day-container" class="col span-1-of-3 clear-margins">
+                                <span>MON</span>
+                                <div class="vl"></div>
+                                <span id="mon-date-1"></span>       
+                            </div>
+                            <div class="col span-2-of-3 clear-margins">
+                                <input type="text" id="mon-start-1" class="input">
+                                <div class="toggle">
+                                    <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round">
+                                                <span class="pm">PM</span>
+                                                <span class="am">AM</span>
+                                            </span>
+                                    </label>
+                                </div>
+                                <div id="to">
+                                    <span>To</span>
+                                </div>
+                                <div class="toggle">
+                                    <label class="switch">
                                         <input type="checkbox">
                                         <span class="slider round">
-                                            <span class="am">AM</span>
                                             <span class="pm">PM</span>
+                                            <span class="am">AM</span>
                                         </span>
-                                </label>
+                                    </label>
+                                </div>
+                                <input type="text" id="mon-end-1" class="input">  
                             </div>
-                            
-                            <div id="to">
-                                <span>TO</span>
-                            </div>
-                            
-                            <div class="toggle">
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider round">
-                                        <span class="am">AM</span>
-                                        <span class="pm">PM</span>
-                                    </span>
-                                </label>
-                            </div>
-                            
-                            <input type="text" id="mon-end-1" class="input">
-                            
                         </div>
-
-                    </div>
-
-                    </div>
+                        
+                        <div id="tue-1" class="row day-row">
+                            <div id="day-container" class="col span-1-of-3 clear-margins">
+                                <span>TUE</span>
+                                <div class="vl"></div>
+                                <span id="tue-date-1"></span>       
+                            </div>
+                            <div class="col span-2-of-3 clear-margins">
+                                <input type="text" id="tue-start-1" class="input">
+                                <div class="toggle">
+                                    <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round">
+                                                <span class="pm">PM</span>
+                                                <span class="am">AM</span>
+                                            </span>
+                                    </label>
+                                </div>
+                                <div id="to">
+                                    <span>To</span>
+                                </div>
+                                <div class="toggle">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round">
+                                            <span class="pm">PM</span>
+                                            <span class="am">AM</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <input type="text" id="tue-end-1" class="input">  
+                            </div>
+                        </div>
+                        
+                        <div id="wed-1" class="row day-row">
+                            <div id="day-container" class="col span-1-of-3 clear-margins">
+                                <span>WED</span>
+                                <div class="vl"></div>
+                                <span id="wed-date-1"></span>       
+                            </div>
+                            <div class="col span-2-of-3 clear-margins">
+                                <input type="text" id="wed-start-1" class="input">
+                                <div class="toggle">
+                                    <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round">
+                                                <span class="pm">PM</span>
+                                                <span class="am">AM</span>
+                                            </span>
+                                    </label>
+                                </div>
+                                <div id="to">
+                                    <span>To</span>
+                                </div>
+                                <div class="toggle">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round">
+                                            <span class="pm">PM</span>
+                                            <span class="am">AM</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <input type="text" id="wed-end-1" class="input">  
+                            </div>
+                        </div>
                     
+                        <div id="thu-1" class="row day-row">
+                            <div id="day-container" class="col span-1-of-3 clear-margins">
+                                <span>THU</span>
+                                <div class="vl"></div>
+                                <span id="thu-date-1"></span>       
+                            </div>
+                            <div class="col span-2-of-3 clear-margins">
+                                <input type="text" id="thu-start-1" class="input">
+                                <div class="toggle">
+                                    <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round">
+                                                <span class="pm">PM</span>
+                                                <span class="am">AM</span>
+                                            </span>
+                                    </label>
+                                </div>
+                                <div id="to">
+                                    <span>To</span>
+                                </div>
+                                <div class="toggle">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round">
+                                            <span class="pm">PM</span>
+                                            <span class="am">AM</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <input type="text" id="thu-end-1" class="input">  
+                            </div>
+                        </div>
+                        
+                        <div id="fri-1" class="row day-row">
+                            <div id="day-container" class="col span-1-of-3 clear-margins">
+                                <span>FRI</span>
+                                <div class="vl"></div>
+                                <span id="fri-date-1"></span>       
+                            </div>
+                            <div class="col span-2-of-3 clear-margins">
+                                <input type="text" id="fri-start-1" class="input">
+                                <div class="toggle">
+                                    <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round">
+                                                <span class="pm">PM</span>
+                                                <span class="am">AM</span>
+                                            </span>
+                                    </label>
+                                </div>
+                                <div id="to">
+                                    <span>To</span>
+                                </div>
+                                <div class="toggle">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round">
+                                            <span class="pm">PM</span>
+                                            <span class="am">AM</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <input type="text" id="fri-end-1" class="input">  
+                            </div>
+                        </div>
+                        
+                        <div id="sat-1" class="row day-row">
+                            <div id="day-container" class="col span-1-of-3 clear-margins">
+                                <span>SAT</span>
+                                <div class="vl"></div>
+                                <span id="sat-date-1"></span>       
+                            </div>
+                            <div class="col span-2-of-3 clear-margins">
+                                <input type="text" id="sat-start-1" class="input">
+                                <div class="toggle">
+                                    <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round">
+                                                <span class="pm">PM</span>
+                                                <span class="am">AM</span>
+                                            </span>
+                                    </label>
+                                </div>
+                                <div id="to">
+                                    <span>To</span>
+                                </div>
+                                <div class="toggle">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round">
+                                            <span class="pm">PM</span>
+                                            <span class="am">AM</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <input type="text" id="sat-end-1" class="input">  
+                            </div>
+                        </div>
+                        
+                        <div id="sun-1" class="row day-row">
+                            <div id="day-container" class="col span-1-of-3 clear-margins">
+                                <span>SUN</span>
+                                <div class="vl"></div>
+                                <span id="sun-date-1"></span>       
+                            </div>
+                            <div class="col span-2-of-3 clear-margins">
+                                <input type="text" id="sun-start-1" class="input">
+                                <div class="toggle">
+                                    <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider round">
+                                                <span class="pm">PM</span>
+                                                <span class="am">AM</span>
+                                            </span>
+                                    </label>
+                                </div>
+                                <div id="to">
+                                    <span>To</span>
+                                </div>
+                                <div class="toggle">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round">
+                                            <span class="pm">PM</span>
+                                            <span class="am">AM</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <input type="text" id="sun-end-1" class="input">  
+                            </div>
+                        </div>
+                    </div>
                     <!--<div id="tue-1" class="row">
                         
                         <div class="col span-1-of-5">
