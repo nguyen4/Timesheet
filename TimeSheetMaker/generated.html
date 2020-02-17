@@ -30,6 +30,90 @@
                 ['sun-date-2', 'sun-start-2', 'sun-end-2']
                            ];
             
+            var startTimes = [
+                    'mon-start-1',
+                    'tue-start-1',
+                    'wed-start-1',
+                    'thu-start-1',
+                    'fri-start-1',
+                    'sat-start-1',
+                    'sun-start-1',
+                    'mon-start-2',
+                    'tue-start-2',
+                    'wed-start-2',
+                    'thu-start-2',
+                    'fri-start-2',
+                    'sat-start-2',
+                    'sun-start-2'
+                    ];
+            
+            var endTimes = [
+                    'mon-end-1',
+                    'tue-end-1',
+                    'wed-end-1',
+                    'thu-end-1',
+                    'fri-end-1',
+                    'sat-end-1',
+                    'sun-end-1',
+                    'mon-end-2',
+                    'tue-end-2',
+                    'wed-end-2',
+                    'thu-end-2',
+                    'fri-end-2',
+                    'sat-end-2',
+                    'sun-end-2'
+                    ];
+            
+            function fillDates(){
+                var startDate = new Date(parseInt(localStorage.getItem('start-day'))),
+                    currentDate = new Date(startDate.getTime());
+                
+                for (var i = 0; i < 7; i++) {
+                    changeData( i, 0, getDatePart(currentDate), 'week-1' );
+                    currentDate.setHours(+24);
+                }
+                
+                for (var i = 7; i < 14; i++) {
+                    changeData( i, 0, getDatePart(currentDate), 'week-2' );
+                    currentDate.setHours(+24);
+                }
+            }
+            
+            function getDatePart(date){
+                
+                var mm = date.getMonth() + 1,
+                    dd = date.getDate();
+                
+                return mm + '/' + dd;
+            }
+            
+            function fillHours( weekNum, weekId ){
+                
+                for (var i = 0; i < weekNum.length; i++){
+            
+                    //retrieve values from localstorace by key and set it to element with same id
+                    var start = localStorage.getItem(weekNum[i][1]),
+                        end = localStorage.getItem(weekNum[i][2]),
+                        elapsedTime = '',
+                        timeIn, timeOut;
+                    
+                    console.log(date);
+                    console.log('start: ' + start + ' |End: ' + end);
+                    if ( start != false) { //change start time  
+                        timeIn = convertTo12Hour(start);
+                        changeData( i, 1, timeIn, weekId );
+                    } 
+                    if ( end != false) {   //change end time
+                        timeOut = convertTo12Hour(end);
+                        changeData( i, 2, timeOut, weekId );
+                    }
+                    if ( start != false && end != false ){ //change total hours
+                        elapsedTime = getElapsedTime( start, end );
+                        changeData( i, 3, elapsedTime, weekId );
+                    }
+                }
+            }
+            
             function fillWeek( weekNum, weekId ){
                 
                 for (var i = 0; i < weekNum.length; i++){
@@ -60,6 +144,8 @@
                     }
                 }
             }
+            
+            
             
             //may need to add a check so that end time is always after start time
             //returns HH:MM
@@ -234,8 +320,26 @@
             function getName(){
                 return localStorage['name'];
             }
+            
+            function stringifyDate(date){
+            
+                var month    = date.getMonth() + 1,
+                    day      = date.getDate(),
+                    year     = date.getFullYear();
+
+                return month + '/' + day + '/' + year;
+
+            }
+            
             function fillInfo(){
                 
+                var startDate = new Date(parseInt(localStorage.getItem('start-day'))),
+                    endDate = new Date(parseInt(localStorage.getItem('end-day')));
+                    
+                $('#from_date').text( stringifyDate(startDate) );
+                $('#to_date').text( stringifyDate(endDate) );
+                
+                fillDates();
                 fillWeek( Week1, 'week-1' );
                 fillWeek( Week2, 'week-2' );
                 fillBiweeklyTotal();

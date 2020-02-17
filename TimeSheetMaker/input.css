@@ -220,9 +220,15 @@ nav img {
 #day-container *{
     display: inline-block;
     float: left;
-    margin-left: 15px;  
 }
 
+#day-container span:first-of-type{
+    width: 70px;
+}
+
+#day-container span:last-of-type {
+    margin-left: 15px;
+}
 .vl {
     
     height: 71px;
@@ -235,7 +241,7 @@ nav img {
     position: relative;
     display: inline-block;
     float: left;
-    margin-top: 23px; 
+    margin-top: 21px; 
     margin-left: 12px;
 }
 

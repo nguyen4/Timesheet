@@ -6,11 +6,8 @@
         <title>TimeSheet Maker</title>
         <link rel="stylesheet" href="input.css">
         <link rel="stylesheet" href="vendor/css/grid.css">
-        <link rel="stylesheet" href="vendor/css/toggle-switch.css">
         <link rel="stylesheet" href="slider_v1.2.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link href="https://gitcdn.github.io/bootstrap-toggle/2.3.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-        <script src="https://gitcdn.github.io/bootstrap-toggle/2.3.2/js/bootstrap-toggle.min.js"></script>
         <script>
   
             var ids = [ 'mon-date-1', 'mon-start-1', 'mon-end-1',
@@ -29,21 +26,56 @@
                         'sun-date-2', 'sun-start-2', 'sun-end-2'
                       ];
             
-            var date_ids = [ '#mon-date-1',
-                             '#tue-date-1',
-                             '#wed-date-1',
-                             '#thu-date-1',
-                             '#fri-date-1',
-                             '#sat-date-1',
-                             '#sun-date-1',
-                             '#mon-date-2',
-                             '#tue-date-2',
-                             '#wed-date-2',
-                             '#thu-date-2',
-                             '#fri-date-2',
-                             '#sat-date-2',
-                             '#sun-date-2'
-                           ]
+            var date_ids =  [ 
+                            'mon-date-1',
+                            'tue-date-1',
+                            'wed-date-1',
+                            'thu-date-1',
+                            'fri-date-1',
+                            'sat-date-1',
+                            'sun-date-1',
+                            'mon-date-2',
+                            'tue-date-2',
+                            'wed-date-2',
+                            'thu-date-2',
+                            'fri-date-2',
+                            'sat-date-2',
+                            'sun-date-2'
+                            ]
+
+            var start_ids = [
+                            'mon-start-1',
+                            'tue-start-1',
+                            'wed-start-1',
+                            'thu-start-1',
+                            'fri-start-1',
+                            'sat-start-1',
+                            'sun-start-1',
+                            'mon-start-2',
+                            'tue-start-2',
+                            'wed-start-2',
+                            'thu-start-2',
+                            'fri-start-2',
+                            'sat-start-2',
+                            'sun-start-2'
+                            ]
+            
+            var end_ids =   [
+                            'mon-end-1',
+                            'tue-end-1',
+                            'wed-end-1',
+                            'thu-end-1',
+                            'fri-end-1',
+                            'sat-end-1',
+                            'sun-end-1',
+                            'mon-end-2',
+                            'tue-end-2',
+                            'wed-end-2',
+                            'thu-end-2',
+                            'fri-end-2',
+                            'sat-end-2',
+                            'sun-end-2'
+                            ]
             
             function packageData() {
                 
@@ -66,11 +98,11 @@
             
             function saveElements() {
                 
-                for (var i = 0; i < ids.length; i++){
+                localStorage.setItem('start-day', currentMon.getTime() ),
+                localStorage.setItem('end-day', currentSun.getTime() );
                 
-                    localStorage.setItem(ids[i], document.getElementById(ids[i]).value);
-            
-                } 
+                start_ids.forEach( e => localStorage.setItem( e, $('#' + e).val()))
+                end_ids.forEach( e => localStorage.setItem( e, $('#' + e).val()))
             }
             
             function saveName() {
@@ -138,12 +170,12 @@
             var newMonday, newSunday;
             
             if (left) {
-                newMonday = goBackTwoWeeks(monday);
-                newSunday = goBackTwoWeeks(sunday);  
+                newMonday = goBackOneWeek(monday);
+                newSunday = goBackOneWeek(sunday);  
             }
             else {
-                newMonday = goForwardTwoWeeks(monday);
-                newSunday = goForwardTwoWeeks(sunday);
+                newMonday = goForwardOneWeek(monday);
+                newSunday = goForwardOneWeek(sunday);
             }
             
             $('#week').text(stringifyDate(newMonday) + ' - ' + stringifyDate(newSunday));
@@ -151,18 +183,18 @@
             currentSun = newSunday;
         }
         
-        function goBackTwoWeeks(date){
+        function goBackOneWeek(date){
             
             var newDate = new Date(date.getTime());
-            newDate.setHours(-24 * 14);
+            newDate.setHours(-24 * 7);
             return newDate;
             
         }
         
-        function goForwardTwoWeeks(date){
+        function goForwardOneWeek(date){
             
             var newDate = new Date(date.getTime());
-            newDate.setHours(+24 * 14);
+            newDate.setHours(+24 * 7);
             return newDate;
             
         }
@@ -181,14 +213,16 @@
                         mm = dates[i].getMonth() + 1,
                         yyyy = dates[i].getFullYear();
                     
-                    var stringDate = (mm + '/' + dd + '/' + yyyy);
-                    $(date_ids[i]).text(stringDate);
+                    var stringDate = (mm + '/' + dd);
+                    $('#' + date_ids[i]).text(stringDate);
                 }
                 
             } catch (e) {
                 console.log('Incorrect number of dates. There are ' + e + ' dates');
             }
         }
+        
+        
         
         function getListOfDates(startDate, endDate) {
             
@@ -301,9 +335,9 @@
                         
                         <div id="mon-1" class="row day-row">
                             <div id="day-container" class="col span-1-of-3 clear-margins">
-                                <span>MON</span>
-                                <div class="vl"></div>
-                                <span id="mon-date-1"></span>       
+                                    <span>MON</span>
+                                    <div class="vl"></div>
+                                    <span id="mon-date-1"></span>     
                             </div>
                             <div class="col span-2-of-3 clear-margins">
                                 <input type="text" id="mon-start-1" class="input">
