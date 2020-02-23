@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="input.css">
         <link rel="stylesheet" href="vendor/css/grid.css">
         <link rel="stylesheet" href="slider_v1.2.css">
+        <script src="resources/js/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
   
@@ -247,6 +248,36 @@
             return list;
         }
         
+        function onBlurEvent(e) {
+            
+            var el = $(e);
+            var str = el.val();
+            var newStr = '';
+            
+            if( str == '' ){
+                return;
+            }
+            
+            if(isTime(str) == false){
+                el.addClass("red-border");
+                return;
+            }
+            
+            if(el.hasClass("red-border")){
+                el.removeClass("red-border");
+            }
+            
+            newStr = autoCompleteTime(str);
+            
+            //validate time
+            
+            $(e).val(newStr);
+        }
+        
+        function autofillTime(e){
+            
+            
+        }
         
     </script>    
     </head>
@@ -340,7 +371,7 @@
                                     <span id="mon-date-1"></span>     
                             </div>
                             <div class="col span-2-of-3 clear-margins">
-                                <input type="text" id="mon-start-1" class="input">
+                                <input type="text" id="mon-start-1" maxlength="5" class="input" onblur="onBlurEvent(this)">
                                 <div class="toggle">
                                     <label class="switch">
                                             <input type="checkbox">
@@ -431,7 +462,6 @@
                                 <input type="text" id="wed-end-1" class="input">  
                             </div>
                         </div>
-                    
                         <div id="thu-1" class="row day-row">
                             <div id="day-container" class="col span-1-of-3 clear-margins">
                                 <span>THU</span>

@@ -33,6 +33,10 @@ body {
 
 /*REUSABLE*/
 
+.red-border {
+    border: 1.3px solid red !important;
+}
+
 .vertical-center {
   margin: 0;
   position: absolute;
