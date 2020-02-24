@@ -42,7 +42,7 @@
                             'fri-date-2',
                             'sat-date-2',
                             'sun-date-2'
-                            ]
+                            ];
 
             var start_ids = [
                             'mon-start-1',
@@ -59,7 +59,7 @@
                             'fri-start-2',
                             'sat-start-2',
                             'sun-start-2'
-                            ]
+                            ];
             
             var end_ids =   [
                             'mon-end-1',
@@ -76,7 +76,7 @@
                             'fri-end-2',
                             'sat-end-2',
                             'sun-end-2'
-                            ]
+                            ];
             
             function packageData() {
                 
@@ -99,17 +99,56 @@
             
             function saveElements() {
                 
+                //set start and end day
                 localStorage.setItem('start-day', currentMon.getTime() ),
                 localStorage.setItem('end-day', currentSun.getTime() );
                 
-                start_ids.forEach( e => localStorage.setItem( e, $('#' + e).val()))
-                end_ids.forEach( e => localStorage.setItem( e, $('#' + e).val()))
+                //get start
+                
+                start_ids.forEach(function (e){ 
+                    
+                    var time = getTimeInput('#' + e);
+                    console.log(time);
+                    //localStorage.setItem( e, $('#' + e).val())
+                                              
+                    });
+                
+                end_ids.forEach(function(e) {
+                    
+                    var time = getTimeInput('#' + e);
+                    console.log(time);
+                    //localStorage.setItem( e, $('#' + e).val())})
+                    });
             }
             
             function saveName() {
                 
                 localStorage['name'] = $('#name').val();
                 console.log(localStorage['name']);
+            }
+            
+            function getTimeInput(e) {
+                
+                var control = $(e);
+                const AM = 'AM', PM = 'PM';
+                var time, 
+                    timeString,  
+                    isAM;
+                
+                time = control.find('input[type=text]').val();
+                isAM = control.find('input[type=checkbox]').is(':checked');
+                
+                if (time == ''){
+                    return '';
+                }
+                
+                if (isAM){
+                    timeString = time + ' ' + AM;
+                } else {
+                    timeString = time + ' ' + PM;
+                }
+                
+                return timeString;
             }
    
     </script>
@@ -269,8 +308,6 @@
             
             newStr = autoCompleteTime(str);
             
-            //validate time
-            
             $(e).val(newStr);
         }
         
@@ -366,231 +403,42 @@
                         
                         <div id="mon-1" class="row day-row">
                             <div id="day-container" class="col span-1-of-3 clear-margins">
-                                    <span>MON</span>
-                                    <div class="vl"></div>
-                                    <span id="mon-date-1"></span>     
-                            </div>
-                            <div class="col span-2-of-3 clear-margins">
-                                <input type="text" id="mon-start-1" maxlength="5" class="input" onblur="onBlurEvent(this)">
-                                <div class="toggle">
-                                    <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round">
-                                                <span class="pm">PM</span>
-                                                <span class="am">AM</span>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div id="to">
-                                    <span>To</span>
-                                </div>
-                                <div class="toggle">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round">
-                                            <span class="pm">PM</span>
-                                            <span class="am">AM</span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <input type="text" id="mon-end-1" class="input">  
-                            </div>
-                        </div>
-                        
-                        <div id="tue-1" class="row day-row">
-                            <div id="day-container" class="col span-1-of-3 clear-margins">
-                                <span>TUE</span>
+                                <span>MON</span>
                                 <div class="vl"></div>
-                                <span id="tue-date-1"></span>       
+                                <span id="mon-date-1"></span>     
                             </div>
-                            <div class="col span-2-of-3 clear-margins">
-                                <input type="text" id="tue-start-1" class="input">
-                                <div class="toggle">
-                                    <label class="switch">
+                            <div id="time-container" class="col span-2-of-3 clear-margins">
+                                <div id="mon-start-1" class='float-left'>
+                                    <div class="input-box">
+                                        <input type="text"  maxlength="5" class="input" onblur="onBlurEvent(this)">
+                                    </div>
+                                    <div class="toggle">
+                                        <label class="switch">
                                             <input type="checkbox">
                                             <span class="slider round">
                                                 <span class="pm">PM</span>
                                                 <span class="am">AM</span>
                                             </span>
-                                    </label>
+                                        </label>
+                                    </div>
                                 </div>
-                                <div id="to">
+                                <div class="to">
                                     <span>To</span>
                                 </div>
-                                <div class="toggle">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round">
-                                            <span class="pm">PM</span>
-                                            <span class="am">AM</span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <input type="text" id="tue-end-1" class="input">  
-                            </div>
-                        </div>
-                        
-                        <div id="wed-1" class="row day-row">
-                            <div id="day-container" class="col span-1-of-3 clear-margins">
-                                <span>WED</span>
-                                <div class="vl"></div>
-                                <span id="wed-date-1"></span>       
-                            </div>
-                            <div class="col span-2-of-3 clear-margins">
-                                <input type="text" id="wed-start-1" class="input">
-                                <div class="toggle">
-                                    <label class="switch">
+                                <div id="mon-end-1" class='float-right'>
+                                    <div class="input-box">
+                                        <input type="text" class="input">  
+                                    </div>
+                                    <div class="toggle">
+                                        <label class="switch">
                                             <input type="checkbox">
                                             <span class="slider round">
                                                 <span class="pm">PM</span>
                                                 <span class="am">AM</span>
                                             </span>
-                                    </label>
+                                        </label>
+                                    </div>
                                 </div>
-                                <div id="to">
-                                    <span>To</span>
-                                </div>
-                                <div class="toggle">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round">
-                                            <span class="pm">PM</span>
-                                            <span class="am">AM</span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <input type="text" id="wed-end-1" class="input">  
-                            </div>
-                        </div>
-                        <div id="thu-1" class="row day-row">
-                            <div id="day-container" class="col span-1-of-3 clear-margins">
-                                <span>THU</span>
-                                <div class="vl"></div>
-                                <span id="thu-date-1"></span>       
-                            </div>
-                            <div class="col span-2-of-3 clear-margins">
-                                <input type="text" id="thu-start-1" class="input">
-                                <div class="toggle">
-                                    <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round">
-                                                <span class="pm">PM</span>
-                                                <span class="am">AM</span>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div id="to">
-                                    <span>To</span>
-                                </div>
-                                <div class="toggle">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round">
-                                            <span class="pm">PM</span>
-                                            <span class="am">AM</span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <input type="text" id="thu-end-1" class="input">  
-                            </div>
-                        </div>
-                        
-                        <div id="fri-1" class="row day-row">
-                            <div id="day-container" class="col span-1-of-3 clear-margins">
-                                <span>FRI</span>
-                                <div class="vl"></div>
-                                <span id="fri-date-1"></span>       
-                            </div>
-                            <div class="col span-2-of-3 clear-margins">
-                                <input type="text" id="fri-start-1" class="input">
-                                <div class="toggle">
-                                    <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round">
-                                                <span class="pm">PM</span>
-                                                <span class="am">AM</span>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div id="to">
-                                    <span>To</span>
-                                </div>
-                                <div class="toggle">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round">
-                                            <span class="pm">PM</span>
-                                            <span class="am">AM</span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <input type="text" id="fri-end-1" class="input">  
-                            </div>
-                        </div>
-                        
-                        <div id="sat-1" class="row day-row">
-                            <div id="day-container" class="col span-1-of-3 clear-margins">
-                                <span>SAT</span>
-                                <div class="vl"></div>
-                                <span id="sat-date-1"></span>       
-                            </div>
-                            <div class="col span-2-of-3 clear-margins">
-                                <input type="text" id="sat-start-1" class="input">
-                                <div class="toggle">
-                                    <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round">
-                                                <span class="pm">PM</span>
-                                                <span class="am">AM</span>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div id="to">
-                                    <span>To</span>
-                                </div>
-                                <div class="toggle">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round">
-                                            <span class="pm">PM</span>
-                                            <span class="am">AM</span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <input type="text" id="sat-end-1" class="input">  
-                            </div>
-                        </div>
-                        
-                        <div id="sun-1" class="row day-row">
-                            <div id="day-container" class="col span-1-of-3 clear-margins">
-                                <span>SUN</span>
-                                <div class="vl"></div>
-                                <span id="sun-date-1"></span>       
-                            </div>
-                            <div class="col span-2-of-3 clear-margins">
-                                <input type="text" id="sun-start-1" class="input">
-                                <div class="toggle">
-                                    <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round">
-                                                <span class="pm">PM</span>
-                                                <span class="am">AM</span>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div id="to">
-                                    <span>To</span>
-                                </div>
-                                <div class="toggle">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round">
-                                            <span class="pm">PM</span>
-                                            <span class="am">AM</span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <input type="text" id="sun-end-1" class="input">  
                             </div>
                         </div>
                     </div>

@@ -59,7 +59,7 @@ body {
 .input {
     height: 35px;
     width: 70px;
-    padding: 0px 5px;
+    padding: 0px 10px;
     border-radius: 3px;
     border: none;
     background-color: #f4f4f4;
@@ -233,6 +233,10 @@ nav img {
 #day-container span:last-of-type {
     margin-left: 15px;
 }
+
+#time-container{
+}
+
 .vl {
     
     height: 71px;
@@ -241,17 +245,39 @@ nav img {
     float: left;
 }
 
-.toggle {
-    position: relative;
+.input-box {
     display: inline-block;
-    float: left;
+    vertical-align: top;
+    margin-left: 10px;
+    margin-top: 16px;
+
+}
+.toggle {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 21px;
+    margin-left: 10px;
+
+/*
     margin-top: 21px; 
     margin-left: 12px;
+*/
 }
 
-#to {
+.to {
     display: inline-block;
-    line-height: 70px;
+    vertical-align: top;
+    margin-top: 22px;
+}
+
+.inline {
+    display: inline-block;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
 }
 .day {
     float: left;
@@ -261,22 +287,6 @@ nav img {
 .day-row {
     height: 70px;
     border-bottom: 1px solid #e2e2e2;
-}
-
-.day-row .input:last-of-type {
-    float: right;
-}
-
-.day-row .toggle:last-of-type {
-    float: right;
-}
-
-.day-row .input {
-    display: inline-block;
-    float: left;
-    margin-left: 10px;
-    line-height: 70px;
-    margin-top: 16px;
 }
 
 .hour-log {
