@@ -6,6 +6,7 @@
         <title>Generated TimeSheet</title>
         <link rel="stylesheet" href="finalimage.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="resources/js/script.js"></script>
 
         
         <script>
@@ -73,7 +74,7 @@
                     currentDate.setHours(+24);
                 }
                 
-                for (var i = 7; i < 14; i++) {
+                for (var i = 0; i < 7; i++) {
                     changeData( i, 0, getDatePart(currentDate), 'week-2' );
                     currentDate.setHours(+24);
                 }
@@ -119,17 +120,18 @@
                 for (var i = 0; i < weekNum.length; i++){
             
                     //retrieve values from localstorace by key and set it to element with same id
-                    var date = localStorage.getItem(weekNum[i][0]),
+                    var 
                         start = localStorage.getItem(weekNum[i][1]),
                         end = localStorage.getItem(weekNum[i][2]),
                         elapsedTime = '',
-                        timeIn, timeOut;
+                        timeIn, timeOut,
+                        date = localStorage.getItem(weekNum[i][0]);
                     
                     console.log(date);
                     console.log('start: ' + start + ' |End: ' + end);
-                    if ( date != false){   //change date
-                        changeData( i, 0, date, weekId );
-                    }
+//                    if ( date != false){   //change date
+//                        changeData( i, 0, date, weekId );
+//                    }
                     if ( start != false) { //change start time  
                         timeIn = convertTo12Hour(start);
                         changeData( i, 1, timeIn, weekId );
@@ -205,6 +207,28 @@
                 return sum;
             }
             
+//            function toDateTimeObject( time ){
+//                
+//                //time is h:mm AM or hh:mm AM
+//                
+//                var d = new Date();
+//                
+//                getHourSide(time); 
+//                getMinSide(time);
+//                
+//                
+//                
+//            }
+//            
+//            function parseHH( time ){
+//                
+//            }
+//            
+//            function parseMM( time ){
+//                
+//            }
+//            
+//            function get 
             function parseTime( time ){
                 var hh = '', mm = '', i = 0;
                 

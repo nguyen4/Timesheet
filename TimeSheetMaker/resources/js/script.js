@@ -77,9 +77,14 @@ function count(str, char){
     return results;
 }
 
+//accpets hh:mm string, returns hh or h
 function getHourSide (str){
     
     var hh = '';
+    
+    if (str == null || str == ''){
+        return hh;
+    }
     
     for (let i = 0; i < str.length; i++){
         if (str[i] == ':'){
@@ -95,7 +100,7 @@ function getMinSide (str){
     
     var mm = '';
     
-    if (str == ''){
+    if (str == null || str == ''){
         return mm;
     }
     

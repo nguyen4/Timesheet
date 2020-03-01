@@ -107,17 +107,20 @@
                 
                 start_ids.forEach(function (e){ 
                     
-                    var time = getTimeInput('#' + e);
-                    console.log(time);
-                    //localStorage.setItem( e, $('#' + e).val())
+                    var time = getTime('#' + e);
+                    var AM   = isAM('#' + e);
+                    time = normalizeTime(time, !AM);
+                    localStorage.setItem(e, time);
                                               
                     });
                 
-                end_ids.forEach(function(e) {
+                end_ids.forEach(function(e){
                     
-                    var time = getTimeInput('#' + e);
-                    console.log(time);
-                    //localStorage.setItem( e, $('#' + e).val())})
+                    var time = getTime('#' + e);
+                    var AM   = isAM('#' + e);
+                    time = normalizeTime(time, !AM);
+                    localStorage.setItem(e, time);
+                    
                     });
             }
             
@@ -125,6 +128,16 @@
                 
                 localStorage['name'] = $('#name').val();
                 console.log(localStorage['name']);
+            }
+            
+            function isAM(e) {
+                var control = $(e);
+                return control.find('input[type=checkbox]').is(':checked');
+            }
+            
+            function getTime(e){
+                var control = $(e);
+                return control.find('input[type=text]').val();
             }
             
             function getTimeInput(e) {
@@ -311,9 +324,28 @@
             $(e).val(newStr);
         }
         
-        function autofillTime(e){
+        //changes time into "HH:MM" 24 hour time 
+        function normalizeTime( time, PM ) {
             
+            //get the time
+            var hh, mm, strTime;
             
+            if (time == null || time == ''){
+                return '';    
+            }
+            
+            hh = getHourSide(time);
+            mm = getMinSide(time);
+            
+            if (PM){
+                 hh = (parseInt(hh) + 12).toString();
+            }
+            
+            if (hh.length == 1){
+                hh = '0' + hh;
+            }
+            
+            return hh + ':' + mm;
         }
         
     </script>    
@@ -410,7 +442,7 @@
                             <div id="time-container" class="col span-2-of-3 clear-margins">
                                 <div id="mon-start-1" class='float-left'>
                                     <div class="input-box">
-                                        <input type="text"  maxlength="5" class="input" onblur="onBlurEvent(this)">
+                                        <input type="text" maxlength="5" class="input" onblur="onBlurEvent(this)">
                                     </div>
                                     <div class="toggle">
                                         <label class="switch">
@@ -427,7 +459,8 @@
                                 </div>
                                 <div id="mon-end-1" class='float-right'>
                                     <div class="input-box">
-                                        <input type="text" class="input">  
+                                        <input type="text" maxlength="5" class="input"
+                                        onblur="onBlurEvent(this)">  
                                     </div>
                                     <div class="toggle">
                                         <label class="switch">
