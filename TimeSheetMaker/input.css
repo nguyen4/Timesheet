@@ -3,7 +3,6 @@ green:  #7cba3f;
 purple: #8600b7;
 light-purple: #f6f1fd;
 
-
 */
 html {
     background-color: #FFF;
@@ -66,21 +65,12 @@ body {
     
 }
 
-input[type="text"]{
+#timeInput input[type="text"]{
     
     text-align: right;
     direction: ltr !important;
     unicode-bidi: bidi-override !important;
     font-size: 18px;
-}
-
-.name {
-    height: 35px;
-    width: 300px;
-    border: none;
-    text-align: center;
-    font-size: 24px;
-    border-bottom: 2px solid #8600b7;
 }
 
 .btn:link,
@@ -319,4 +309,110 @@ nav img {
 
 .section-step-4 p {
     margin: 0 auto;
+}
+
+/* Buttons */
+.btn1 {
+    text-align: center;
+}
+.clear-btn, .continue-btn {
+}
+
+.clear-btn {
+	background-color:#fff;
+	border-radius:5px;
+	border:1px solid #7cba3f;
+	display:inline-block;
+	cursor:pointer;
+	color:#7cba3f;
+	font-size:15px;
+	font-weight:bold;
+	padding:11px 23px;
+	text-decoration:none;
+
+}
+.clear-btn:hover {
+    background-color:#f2f2f2;
+}
+.clear-btn:active {
+	position:relative;
+	top:1px;
+}
+
+.continue-btn {
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background-color:#7cba3f;
+	border-radius:5px;
+	border:1px solid #7cba3f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:15px;
+	font-weight:bold;
+	padding:11px 23px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+}
+.continue-btn:hover {
+	background-color:#619131;
+    border: 1px solid #619131;
+}
+.continue-btn:active {
+	position:relative;
+	top:1px;
+}
+
+/* Signature items*/
+
+.modal-content {
+    position: relative;
+}
+
+.modal-header {
+    position: relative;
+}
+
+hr{ 
+    position: absolute;
+    top: 200px;
+    left: 50px;
+    width: 500px;
+    border: 1px solid #8600b7; 
+    pointer-events: none;
+}
+
+.position-x {
+    position: absolute;
+    font-size: 2em;
+    top: 170px;
+    left: 50px;
+    color: #8600b7;
+    pointer-events: none;
+    
+}
+
+.modal-close {
+    position: absolute;
+    height: 25px; 
+    width: 25px;
+    top: 0px;
+    left: 555px;
+    transition: transform .1s;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    transform: scale(1.1);
+}
+
+.name {
+    position: absolute;
+    height: 50px;
+    width: 400px;
+    top: 120px;
+    left: 100px;
+    border: none;
+    text-align: center;
+    font-size: 32px;
+    border-bottom: 2px solid #8600b7;
 }

@@ -68,7 +68,7 @@ function autoCompleteTime(str){
 function count(str, char){
     var results = 0;
     
-    for (let i = 0; i < str.length; i++){
+    for (var i = 0; i < str.length; i++){
         if (str[i] === char){
             results++;
         }

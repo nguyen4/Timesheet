@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="input.css">
         <link rel="stylesheet" href="vendor/css/grid.css">
         <link rel="stylesheet" href="slider_v1.2.css">
+        <link rel="stylesheet" href="popup-modal.css">
         <script src="resources/js/script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
@@ -348,6 +349,46 @@
             return hh + ':' + mm;
         }
         
+        /* modal scripts */
+        
+        function modalClickEvents(e) {
+            if (e == 'open') {
+                $('.popup-modal').css('display', 'flex');
+            }
+            else if (e == 'close') {
+                $('.popup-modal').css('display', 'none');
+            }
+            else if (e == 'clear') {
+                clearCanvas();
+            }
+        };
+        
+        function clearCanvas() {
+            var $canvas = $('#canvas');
+            var ctx = $canvas[0].getContext('2d');
+            c_width = $canvas.width();
+            c_height = $canvas.height();
+            ctx.clearRect(0, 0, c_width, c_height);
+        };
+        
+        //displays input for name
+        function enterNameSetup() {
+            $('.popup-modal').find('h2').text('Enter Your Name');
+            $('.modal-content').find('#signature').css('display', 'none');
+            
+            $('.popup-modal').find('#nameInput').css('display', 'block');
+            
+        }
+        
+        //displays canvas for signing
+        function enterSignatureSetup(){
+            
+            $('.popup-modal').find('h2').text('Sign');
+            $('.popup-modal').find('#nameInput').css('display', 'none');
+            
+            $('.modal-content').find('#signature').css('display', 'block');
+            
+        }
     </script>    
     </head>
     
@@ -442,7 +483,7 @@
                             <div id="time-container" class="col span-2-of-3 clear-margins">
                                 <div id="mon-start-1" class='float-left'>
                                     <div class="input-box">
-                                        <input type="text" maxlength="5" class="input" onblur="onBlurEvent(this)">
+                                        <input id="timeInput" type="text" maxlength="5" class="input" onblur="onBlurEvent(this)">
                                     </div>
                                     <div class="toggle">
                                         <label class="switch">
@@ -459,7 +500,7 @@
                                 </div>
                                 <div id="mon-end-1" class='float-right'>
                                     <div class="input-box">
-                                        <input type="text" maxlength="5" class="input"
+                                        <input id="timeInput" type="text" maxlength="5" class="input"
                                         onblur="onBlurEvent(this)">  
                                     </div>
                                     <div class="toggle">
@@ -735,9 +776,12 @@
             
             <div class="row section-step-3">
                 
+<!--
                 <h1>Step 3</h1>
                 <h2>Sign Here</h2>
+-->
                 
+<!--
                 <div class="container-sign">
                     <canvas id="canvas" style="width:600px; height:300px;" width="600" height="300" class="canvas-sign"></canvas>       
                     <script src="resources/js/signature-module.js"></script>
@@ -754,6 +798,7 @@
                             });
                     </script>
                 </div>
+-->
             </div>
         
         </section>
@@ -761,16 +806,53 @@
         <section>
             
             <div class="row section-step-4">
+<!--
                 <h1>Step 4</h1>
                 <h2>Click generate to make your timesheet</h2>
+-->
                 <p>
-                    <a class="btn btn-full generate" id="btn-generate" onClick="packageData()" href="generated.html">GENERATE</a>
+                    <a class="btn btn-full" id="btn-generate" href="#" onclick="modalClickEvents('open')">GENERATE</a>
                 </p>
             </div>
             
         </section>
+            
+        <!-- Modal Content -->
+            
         </div>
         </div> 
+        </div>
+        <div class="popup-modal" style="display: none;">
+            <div class="modal-body">
+                <div class="modal-header" style="text-align: center;">
+                    <h2 style="color: #8600b7;">Sign Below</h2>
+                    <img class="modal-close" src="https://img.icons8.com/ios/50/8600b7/cancel.png" onclick="modalClickEvents('close')">
+                </div>
+                <div class="modal-content">
+                    <!-- Name -->
+                    <div id="nameInput">
+                        <input id="name" type="text" class="name" placeholder="Your name">   
+                    </div>
+                    <!-- Signature -->
+                    <div id="signature">
+                        <div class=container-sign>
+                            <canvas id="canvas" style="width:600px; height:300px;" width="600" height="300"></canvas>
+                            <script src="resources/js/signature-module.js"></script>
+                        </div>
+                        <hr>
+                        <span class="position-x">X</span>
+                    </div>
+                    
+                    <!--Signature line -->
+                    
+                </div>
+                <div class="modal-footer">
+                    <div class="float-right" style="margin-right: 20px;">
+                        <a id="clear-sign" href="#" class="btn1 clear-btn" onclick="modalClickEvents('clear')">Clear</a>
+                        <a href="generated.html" class="btn1 continue-btn" onClick="packageData()">Continue</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
