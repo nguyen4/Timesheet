@@ -82,7 +82,7 @@
             function packageData() {
                 
                 localStorage.clear();
-                //saveName();
+                saveName();
                 saveElements();
                 saveCanvas();
                 
@@ -125,10 +125,8 @@
                     });
             }
             
-            function saveName() {
-                
+            function saveName() {              
                 localStorage['name'] = $('#name').val();
-                console.log(localStorage['name']);
             }
             
             function isAM(e) {
@@ -353,16 +351,38 @@
         
         function modalClickEvents(e) {
             if (e == 'open') {
-                $('.popup-modal').css('display', 'flex');
+                openModal();
+                enterNameSetup();
             }
             else if (e == 'close') {
-                $('.popup-modal').css('display', 'none');
+                closeModal();
             }
             else if (e == 'clear') {
                 clearCanvas();
             }
+            else if (e == 'continue') {
+                continuePressed();
+            }
         };
         
+        function openModal(){
+            $('.popup-modal').css('display', 'flex');
+        }
+        function closeModal(){
+            $('.popup-modal').css('display', 'none');
+        }
+        function continuePressed(){
+            var text = $('.popup-modal').find('h2').text()
+            if (text == 'Enter Your Name') {
+                enterSignatureSetup()
+            }
+            if (text == 'Sign') {
+                packageData();
+                window.location.href = "generated.html"
+            }
+        }
+        
+
         function clearCanvas() {
             var $canvas = $('#canvas');
             var ctx = $canvas[0].getContext('2d');
@@ -375,7 +395,6 @@
         function enterNameSetup() {
             $('.popup-modal').find('h2').text('Enter Your Name');
             $('.modal-content').find('#signature').css('display', 'none');
-            
             $('.popup-modal').find('#nameInput').css('display', 'block');
             
         }
@@ -385,7 +404,6 @@
             
             $('.popup-modal').find('h2').text('Sign');
             $('.popup-modal').find('#nameInput').css('display', 'none');
-            
             $('.modal-content').find('#signature').css('display', 'block');
             
         }
@@ -849,7 +867,7 @@
                 <div class="modal-footer">
                     <div class="float-right" style="margin-right: 20px;">
                         <a id="clear-sign" href="#" class="btn1 clear-btn" onclick="modalClickEvents('clear')">Clear</a>
-                        <a href="generated.html" class="btn1 continue-btn" onClick="packageData()">Continue</a>
+                        <a href="#" class="btn1 continue-btn" onClick="modalClickEvents('continue')">Continue</a>
                     </div>
                 </div>
             </div>
