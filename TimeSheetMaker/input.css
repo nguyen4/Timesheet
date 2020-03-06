@@ -65,7 +65,7 @@ body {
     
 }
 
-#timeInput input[type="text"]{
+.input-box input[type="text"]{
     
     text-align: right;
     direction: ltr !important;
