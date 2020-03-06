@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center; 
-
+    transition: 1s
 }
 
 .modal-body {
@@ -26,7 +26,7 @@
 
 .modal-header {
     width: 600px;
-    height: 50px;
+    height: 60px;
 }
 
 .modal-footer {

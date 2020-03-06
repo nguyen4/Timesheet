@@ -392,17 +392,43 @@ hr{
 }
 
 .modal-close {
-    position: absolute;
-    height: 25px; 
-    width: 25px;
-    top: 0px;
-    left: 555px;
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+    height: 30px; 
+    width: 30px;
     transition: transform .1s;
     cursor: pointer;
+    transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
 }
 
 .modal-close:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(90deg);
+}
+
+.modal-back {
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+    height: 30px; 
+    width: 30px;
+    transition: transform .1s;
+    transform: scale(1.2);
+    
+}
+
+#back-btn {
+    cursor: pointer;
+}
+#back-btn:hover .modal-back {
+    
+    transform: translateX(-10px) ;
+}
+
+#header-name {
+    line-height: 50px;
+    font-weight: 400;
+    font-size: 30px;
 }
 
 .name {
