@@ -114,6 +114,10 @@ h2 {
     padding: 40px 0;
 }
 
+.header {
+    color: #7cba3f;
+}
+
 /*NAVIGATION*/
 nav {
     height: 70px;
